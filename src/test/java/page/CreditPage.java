@@ -1,95 +1,51 @@
-package data;
+package page;
 
-import lombok.val;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import data.Card;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.Duration;
 
-public class DataGenerator {
-    private DataGenerator() {
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+
+public class CreditPage {
+    private SelenideElement heading=$$("h3").find(Condition.text("Кредит по данным карты"));
+    private SelenideElement cardNumberField = $(byText("Номер карты")).parent().$(".input__control");
+    private SelenideElement monthField = $(byText("Месяц")).parent().$(".input__control");
+    private SelenideElement yearField = $(byText("Год")).parent().$(".input__control");
+    private SelenideElement ownerField = $(byText("Владелец")).parent().$(".input__control");
+    private SelenideElement cvcField = $(byText("CVC/CVV")).parent().$(".input__control");
+    private SelenideElement continueButton = $$("button").find(exactText("Продолжить"));
+    private SelenideElement notificationOK = $(".notification_status_ok");
+    private SelenideElement notificationError = $(".notification_status_error");
+    private SelenideElement inputInvalid = $(".input__sub");
+
+    public CreditPage() {
+        heading.shouldBe(visible);
     }
 
-    public static Card getApprovedCard() {
-        LocalDate today = LocalDate.now();
-        String month = String.valueOf(today).substring(5,7);
-        String year = String.valueOf(today).substring(2,4);
-        return new Card("4444 4444 4444 4441", month, year, "Ivanov", "123");
+    public void fillData(Card card) {
+        cardNumberField.setValue(card.getNumber());
+        monthField.setValue(card.getMonth());
+        yearField.setValue(card.getYear());
+        ownerField.setValue(card.getHolder());
+        cvcField.setValue(card.getCvc());
+        continueButton.click();
     }
 
-    public static Card getDeclinedCard() {
-        LocalDate today = LocalDate.now();
-        String month = String.valueOf(today).substring(5,7);
-        String year = String.valueOf(today).substring(2,4);
-        return new Card("4444 4444 4444 4442", month, year, "Ivanov", "123");
+    public void waitNotificationOk() {
+        notificationOK.shouldBe(visible,Duration.ofMillis(15000));
     }
 
-    public static Card getNonExistentCard() {
-        LocalDate today = LocalDate.now();
-        String month = String.valueOf(today).substring(5,7);
-        String year = String.valueOf(today).substring(2,4);
-        return new Card("1111 1111 1111 1111", month, year, "Ivanov", "123");
+    public void waitNotificationError() {
+        notificationError.shouldBe(visible,Duration.ofMillis(15000));
     }
 
-    public static Card getIncorrectNumberCard() {
-        LocalDate today = LocalDate.now();
-        String month = String.valueOf(today).substring(5,7);
-        String year = String.valueOf(today).substring(2,4);
-        return new Card("4444 4444 4444 444", month, year, "Ivanov", "123");
-    }
-
-    public static Card getExpiredMonthCard() {
-        LocalDate today = LocalDate.now();
-        LocalDate lastMonth = today.minusMonths(1);
-        String month = String.valueOf(lastMonth).substring(5,7);
-        String year = String.valueOf(today).substring(2,4);
-        return new Card("4444 4444 4444 4441", month, year, "Ivanov", "123");
-    }
-
-    public static Card getIncorrectMonthCard(String month) {
-        LocalDate today = LocalDate.now();
-        String year = String.valueOf(today).substring(2,4);
-        return new Card("4444 4444 4444 4441", month, year, "Ivanov", "123");
-    }
-
-    public static Card getIncorrectFormatMonthCard() {
-        LocalDate today = LocalDate.now();
-        String year = String.valueOf(today).substring(2,4);
-        return new Card("4444 4444 4444 4441", "0", year, "Ivanov", "123");
-    }
-
-    public static Card getExpiredYearCard() {
-        LocalDate today = LocalDate.now();
-        LocalDate lastYear = today.minusYears(1);
-        String month = String.valueOf(today).substring(5,7);
-        String year = String.valueOf(lastYear).substring(2,4);
-        return new Card("4444 4444 4444 4441", month, year, "Ivanov", "123");
-    }
-
-    public static Card getYearMore5Card() {
-        LocalDate today = LocalDate.now();
-        LocalDate newYear = today.plusYears(6);
-        String month = String.valueOf(today).substring(5,7);
-        String year = String.valueOf(newYear).substring(2,4);
-        return new Card("4444 4444 4444 4441", month, year, "Ivanov", "123");
-    }
-
-    public static Card getIncorrectYearCard() {
-        LocalDate today = LocalDate.now();
-        String month = String.valueOf(today).substring(5,7);
-        return new Card("4444 4444 4444 4441", month, "0", "Ivanov", "123");
-    }
-
-    public static Card getIncorrectHolderCard() {
-        LocalDate today = LocalDate.now();
-        String month = String.valueOf(today).substring(5,7);
-        String year = String.valueOf(today).substring(2,4);
-        return new Card("4444 4444 4444 4441", month, year, "Ivanov!@#$%^&*()_+", "123");
-    }
-
-    public static Card getIncorrectCVCCard() {
-        LocalDate today = LocalDate.now();
-        String month = String.valueOf(today).substring(5,7);
-        String year = String.valueOf(today).substring(2,4);
-        return new Card("4444 4444 4444 4441", month, year, "Ivanov", "0");
+    public String getInputInvalid() {
+        return inputInvalid.getText();
     }
 }
