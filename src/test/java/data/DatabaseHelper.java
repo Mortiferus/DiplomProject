@@ -8,9 +8,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseHelper {
-    static String url = System.getProperty("DatabaseHelper.url");
-    static String user = System.getProperty("DatabaseHelper.user");
-    static String password = System.getProperty("DatabaseHelper.password");
+    static String url = System.getProperty("db.url");
+    static String user = System.getProperty("db.user");
+    static String password = System.getProperty("db.password");
 
     public static void clearData() {
         val deleteOrderEntity = "DELETE FROM order_entity";
