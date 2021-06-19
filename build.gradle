@@ -30,7 +30,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
     testImplementation 'com.codeborne:selenide:5.22.0'
     testImplementation 'mysql:mysql-connector-java:8.0.25'
-    testImplementation 'postgresql:postgresql:42.2.20'
+    testImplementation 'postgresql:postgresql:9.4-1206-jdbc42'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'io.rest-assured:rest-assured:4.4.0'
     testImplementation 'io.qameta.allure:allure-selenide:2.13.4'
