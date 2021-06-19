@@ -1,7 +1,7 @@
 package test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
-import data.BD;
+import data.DatabaseHelper;
 import data.Card;
 import data.DataGenerator;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -33,7 +33,7 @@ public class CreditPageTest {
 
     @Test
     void shouldCreditByCardWithStatusApproved()  {
-        BD.clearData();
+        DatabaseHelper.clearData();
         Card card= DataGenerator.getApprovedCard();
         val startPage=new StartPage();
         val creditPage=startPage.goToCreditPage();
@@ -44,7 +44,7 @@ public class CreditPageTest {
 
     @Test
     void shouldCreditByCardWithStatusDecline() {
-        BD.clearData();
+        DatabaseHelper.clearData();
         Card card= DataGenerator.getDeclinedCard();
         val startPage=new StartPage();
         val creditPage=startPage.goToCreditPage();
