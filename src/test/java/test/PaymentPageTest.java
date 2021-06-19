@@ -1,7 +1,7 @@
 package test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
-import data.BD;
+import data.DatabaseHelper;
 import data.Card;
 import data.DataGenerator;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -36,24 +36,24 @@ public class PaymentPageTest {
 
     @Test
     void shouldPaymentByCardWithStatusApproved()  {
-        BD.clearData();
+        DatabaseHelper.clearData();
         Card card= DataGenerator.getApprovedCard();
         val startPage=new StartPage();
         val paymentPage=startPage.goToPaymentPage();
         paymentPage.fillData(card);
         paymentPage.waitNotificationOk();
-        assertEquals("APPROVED", BD.getPaymentStatus());
+        assertEquals("APPROVED", DatabaseHelper.getPaymentStatus());
     }
 
     @Test
     void shouldPaymentByCardWithStatusDecline() {
-        BD.clearData();
+        DatabaseHelper.clearData();
         Card card= DataGenerator.getDeclinedCard();
         val startPage=new StartPage();
         val paymentPage=startPage.goToPaymentPage();
         paymentPage.fillData(card);
         paymentPage.waitNotificationError();
-        assertEquals("DECLINED",BD.getPaymentStatus());
+        assertEquals("DECLINED",DatabaseHelper.getPaymentStatus());
     }
 
 
