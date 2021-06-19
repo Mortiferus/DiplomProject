@@ -39,7 +39,7 @@ public class CreditPageTest {
         val creditPage=startPage.goToCreditPage();
         creditPage.fillData(card);
         creditPage.waitNotificationOk();
-        assertEquals("APPROVED",BD.getCreditStatus());
+        assertEquals("APPROVED",DatabaseHelper.getCreditStatus());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class CreditPageTest {
         val creditPage=startPage.goToCreditPage();
         creditPage.fillData(card);
         creditPage.waitNotificationError();
-        assertEquals("DECLINED",BD.getCreditStatus());
+        assertEquals("DECLINED",DatabaseHelper.getCreditStatus());
     }
 
 
