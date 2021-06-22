@@ -14,3 +14,8 @@
    * для запуска под PostgreSQL использовать команду      
    ```docker run --name pstg-container -d test -d postgres```
 5. после окончания тестов завершить работу приложения (Ctrl+C), остановить контейнеры командой `docker-compose down`   
+
+# **Документация**
+1. [**Планирование**](https://github.com/Mortiferus/DiplomProject/blob/master/documents/Plan.md)
+2. [**Отчёт о проведённом тестировании**](https://github.com/Mortiferus/DiplomProject/blob/master/documents/Report.md)
+3. [**Отчёт по итогам автоматизации**](https://github.com/Mortiferus/DiplomProject/blob/master/documents/Summary.md)
