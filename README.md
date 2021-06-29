@@ -7,12 +7,12 @@
     * для запуска под MySQL использовать команду   
     ```java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar aqa-shop.jar```
     * для запуска под PostgreSQL использовать команду      
-   ```java -Dspring.datasource.url=jdbc:postgres://localhost:3306/app -jar aqa-shop.jar```
+   ```java -Dspring.datasource.url=jdbc:postgres://localhost:5432/app -jar aqa-shop.jar```
 4. запустить тесты:
    * для запуска под MySQL использовать команду                                          
    ```gradlew -Ddb.url=jdbc:mysql://localhost:3306/app clean test```
    * для запуска под PostgreSQL использовать команду      
-   ```gradlew -Ddb.url=jdbc:postgres://localhost:3306/app clean test```
+   ```gradlew -Ddb.url=jdbc:postgres://localhost:5432/app clean test```
 5. после окончания тестов завершить работу приложения (Ctrl+C), остановить контейнеры командой `docker-compose down`   
 
 # **Документация**
